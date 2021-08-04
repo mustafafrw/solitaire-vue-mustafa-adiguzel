@@ -79,7 +79,7 @@ export default {
     cursor: pointer;
 }
 .card-back {
-   background-image: url('https://bfa.github.io/solitaire-js/img/card_back_bg.png');
+   background-image: url('/card_back.webp');
    background-size: cover;
    background-repeat: no-repeat;
    width: inherit;
