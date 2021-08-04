@@ -2,13 +2,16 @@
   <div class="home">
     <div class="table">
       <Board v-for="board in boards" :key="board.id" :id="board.id">
-        <Card 
+        <div v-if="board.cards && board.cards.length > 0">
+          <Card 
             v-for="card in board.cards"
             :key="card.id"
             :card="card"
             class='drag-el' 
-            :draggable="card"
+            :draggable="card.open"
           />
+        </div>
+        <div v-else class="card card-placeholder"></div>
       </Board>
     </div>
   </div>
@@ -66,5 +69,8 @@ export default {
 }
 .table .board {
   margin-right: 10px;
+}
+.card-placeholder{
+  border: 3px groove #d6d6d6;
 }
 </style>
