@@ -6,12 +6,18 @@
   >
       <div v-if="card.open" class="card-open">
           <span class="card-number-top">{{ card.title }}</span>
-          <div class="card-symbol">
+          <div
+            v-if="isLast"
+            class="card-symbol"
+          >
               <span>
                   ♣
               </span>
           </div>
-          <span class="card-number-bottom">{{ card.title }}</span>
+          <span
+            v-if="isLast"
+            class="card-number-bottom"
+          >{{ card.title }}</span>
       </div>
       <div v-else class="card-back"></div>
   </div>
