@@ -73,5 +73,6 @@ export default {
 }
 .card-placeholder{
   border: 3px groove #d6d6d6;
+  height: 160px;
 }
 </style>

@@ -13,6 +13,17 @@ export default {
             cardsBoard.cards = cardsBoard.cards.filter(card => card.id !== payload.card.id);
         }
     },
+    openNextCard(state, payload){
+        const cardsBoard = state.boards.find(board => {
+            return board.cards.find(card => card.id === payload.card.id)
+        });
+        if(cardsBoard && cardsBoard.cards.length > 1){
+            const nextCard = cardsBoard.cards[cardsBoard.cards.length -2];
+            if(!nextCard.open) {
+                nextCard.open = true;
+            }
+        }
+    },
     setBoards(state, payload){
         state.boards = payload;
     },

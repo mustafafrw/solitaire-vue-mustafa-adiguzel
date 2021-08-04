@@ -7,6 +7,7 @@ export default {
     move({ commit }, payload){
         
         if(payload && payload.card && payload.card.open){
+            commit('openNextCard', payload)
             commit('removeFromBoard', payload)
             commit('addToBoard', payload)
         }

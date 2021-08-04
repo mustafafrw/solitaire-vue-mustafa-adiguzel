@@ -19,7 +19,11 @@
             class="card-number-bottom"
           >{{ card.title }}</span>
       </div>
-      <div v-else class="card-back"></div>
+      <div 
+      v-else 
+      class="card-back"
+      :class="{ 'image-fill': isLast }"
+      ></div>
   </div>
 </template>
 
@@ -80,7 +84,6 @@ export default {
 }
 .card-back {
    background-image: url('/card_back.webp');
-   background-size: cover;
    background-repeat: no-repeat;
    width: inherit;
    height: inherit;
@@ -100,7 +103,9 @@ export default {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-
+.image-fill{
+    background-size: 100% 100%;
+}
 .card-number-top {
     top: 2px;
     left: 10px;
