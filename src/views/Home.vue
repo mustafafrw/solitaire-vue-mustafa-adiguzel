@@ -4,11 +4,12 @@
       <Board v-for="board in boards" :key="board.id" :id="board.id">
         <div v-if="board.cards && board.cards.length > 0">
           <Card 
-            v-for="card in board.cards"
+            v-for="(card, index) in board.cards"
             :key="card.id"
             :card="card"
             class='drag-el' 
             :draggable="card.open"
+            :isLast="index == board.cards.length - 1 ? true : false"
           />
         </div>
         <div v-else class="card card-placeholder"></div>

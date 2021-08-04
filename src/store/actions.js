@@ -5,8 +5,12 @@ import { nanoid } from 'nanoid'
 
 export default {
     move({ commit }, payload){
-        commit('removeFromBoard', payload)
-        commit('addToBoard', payload)
+        
+        if(payload && payload.card && payload.card.open){
+            commit('removeFromBoard', payload)
+            commit('addToBoard', payload)
+        }
+        
     },
     init({ dispatch }){
         // for(let i=1;i<=13;i++){

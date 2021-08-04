@@ -1,6 +1,7 @@
 <template>
   <div v-if="card" 
     class="card"
+    :class="[ isLast ? 'card-last' : 'card-summary']"
     @dragstart='startDrag($event, card)'
   >
       <div v-if="card.open" class="card-open">
@@ -22,6 +23,9 @@ export default {
         card: {
             type: Object,
             required: true
+        },
+        isLast: {
+            type: Boolean
         }
     },
     methods: {
@@ -37,7 +41,7 @@ export default {
 <style>
 .card {
     width: 120px;
-    height: 160px;
+    
     /* background:linear-gradient(135deg, #E3E3E3 0%,#ced0d2 100%); */
     border-radius: 7px;
     background-repeat: no-repeat;
@@ -47,11 +51,19 @@ export default {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
     position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     
+}
+.card-last {
+    height: 160px;
+    
+}
+.card-summary {
+    height: 40px;
 }
 .card-open {
     background:linear-gradient(135deg, #d9dadb 0%,#c4c6c9 100%);
@@ -62,10 +74,10 @@ export default {
 }
 .card-back {
    background-image: url('https://bfa.github.io/solitaire-js/img/card_back_bg.png');
-   background-size: contain;
+   background-size: cover;
    background-repeat: no-repeat;
-   width: 100%;
-   height: 100%;
+   width: inherit;
+   height: inherit;
 }
 .card span {
     position: absolute;
