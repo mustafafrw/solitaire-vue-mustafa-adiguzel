@@ -27,26 +27,6 @@ export default {
     Card,
     Board
   },
-  data(){
-    return {
-       drag: false,
-       
-       items: [
-         {    
-           id: 1,
-           number: 1,
-           title: "A",
-           list: 1
-         },
-         {    
-           id: 2,
-           number: 2,
-           title: "2",
-           list: 2
-         }
-       ]
-    }
-  },
   computed: {
     boards(){
       return this.$store.getters.getBoards
