@@ -17,9 +17,8 @@ export const isMovable = (dragCard, dropBoardId) => {
 
     const dropBoard = mainModule.state.boards.find(board => board.id === dropBoardId);
 
-
-    return isLastCard(dragCard, cardsBoard)
-           && isSiblingCard(dragCard, dropBoard)
+    return isLastCard(dragCard, cardsBoard) || areChildsInOrder(dragCard, cardsBoard)
+           && isChildCard(dragCard, dropBoard)
 }
 
 export const isLastCard = (dragCard, cardsBoard) => {
@@ -30,10 +29,38 @@ export const isLastCard = (dragCard, cardsBoard) => {
     return false;
 }
 
-export const isSiblingCard = (dragCard, dropBoard) => {
+export const isChildCard = (dragCard, dropBoard) => {
     if(dropBoard.cards.length > 0){
         const lastCardObject = dropBoard.cards[dropBoard.cards.length - 1]
         if(lastCardObject && lastCardObject.number === dragCard.number + 1) return true
+    }else{
+        return true
     }
-    return false
+}
+
+export const areChildsInOrder = (dragCard, cardsBoard) => {
+    let inOrder = false;
+    if(cardsBoard.cards.length > 0){
+        let dragCardIndex = -1;
+        let tempCard = dragCard;
+        cardsBoard.cards.forEach((card, index) => {
+            if(card.id === dragCard.id) {
+                dragCardIndex = index;
+            }else if(dragCardIndex > -1){
+                // look for the next cards
+                if((card.number + 1) === tempCard.number){
+                    tempCard = card;
+                    if(index === cardsBoard.cards.length -1){
+                        inOrder = true;
+                        return;
+                    }
+                }else{
+                    inOrder = false;
+                    return;
+                }
+            }
+        });
+
+    }
+    return inOrder;
 }
