@@ -2,7 +2,7 @@
   <div
     :id="id"
     class="board"
-    @drop='onDrop($event, id)' 
+    @drop='onDrop($event)' 
     @dragover.prevent 
     @dragenter.prevent
   >
@@ -14,15 +14,16 @@
 export default {
     props: {
         id: {
-            type: String
+            type: String,
+            default: ''
         }
     },
     methods: {
-       onDrop(evt, boardId) {
-        const card = JSON.parse(evt.dataTransfer.getData('card'))
+       onDrop(e) {
+        const cards = JSON.parse(e.dataTransfer.getData('cards'))
         const payload = {
-          boardId,
-          card
+          boardId: this.id,
+          cards
         }
         this.$store.dispatch('move', payload)
       },
@@ -39,6 +40,6 @@ export default {
     height: 100;
 }
 .board .card {
-    margin-top: -8px;
+    margin-top: -10px;
 }
 </style>

@@ -1,13 +1,10 @@
-// import { shuffle } from "lodash";
-
-import { shuffle } from "lodash";
 import { nanoid } from 'nanoid'
-import { cardTitle, isMovable } from '@/util/Card'
+import { cardTitle, createDeck, isMovable } from '@/util/Card'
 
 export default {
     move({ commit }, payload){
-        if(payload && payload.card && payload.boardId){
-            if(isMovable(payload.card, payload.boardId)){
+        if(payload && payload.cards && payload.cards.length > 0 && payload.boardId){
+            if(isMovable(payload.cards[0], payload.boardId)){
                 commit('openNextCard', payload)
                 commit('removeFromBoard', payload)
                 commit('addToBoard', payload)
@@ -35,12 +32,8 @@ export default {
         commit('setBoards', boards)
     },
     initCards({ commit, state }){
-        let deck = Array.from({length: 13}, (_, i) => i + 1)
-        deck = deck.concat(deck)
-            .concat(deck)
-            .concat(deck)
-        
-        deck = shuffle(deck)
+        const deck = createDeck();
+
         while(deck.length > 0){
             for(let i=0;i<state.boards.length;i++){
                 const lastCard = deck.pop()
@@ -63,4 +56,5 @@ export default {
             }
         }
     },
+    
 };

@@ -1,4 +1,5 @@
 import mainModule from '@/store/index'
+import { shuffle } from "lodash";
 
 export const cardTitle = (cardNumber) => {
     if(cardNumber == 13) return 'K'
@@ -6,6 +7,15 @@ export const cardTitle = (cardNumber) => {
     else if(cardNumber == 11) return 'J'
     else if(cardNumber == 1) return 'A'
     else return cardNumber
+}
+
+export const createDeck = () => {
+    let deck = Array.from({ length: 13 }, (_, i) => i + 1)
+    deck = deck.concat(deck)
+        .concat(deck)
+        .concat(deck)
+    
+    return shuffle(deck)
 }
 
 export const isMovable = (dragCard, dropBoardId) => {
@@ -16,8 +26,10 @@ export const isMovable = (dragCard, dropBoardId) => {
     });
 
     const dropBoard = mainModule.state.boards.find(board => board.id === dropBoardId);
-
-    return isLastCard(dragCard, cardsBoard) || areChildsInOrder(dragCard, cardsBoard)
+    return (
+           isLastCard(dragCard, cardsBoard) 
+           || orderedChilds(dragCard, cardsBoard)
+           )
            && isChildCard(dragCard, dropBoard)
 }
 
@@ -38,29 +50,39 @@ export const isChildCard = (dragCard, dropBoard) => {
     }
 }
 
-export const areChildsInOrder = (dragCard, cardsBoard) => {
+export const orderedChilds = (dragCard, cardsBoard) => {
+    let draggingCards = [dragCard]
+
     let inOrder = false;
-    if(cardsBoard.cards.length > 0){
+    if(isLastCard(dragCard, cardsBoard)){ 
+        return draggingCards 
+    }
+    else if(cardsBoard.cards.length > 0){
+
         let dragCardIndex = -1;
         let tempCard = dragCard;
+
         cardsBoard.cards.forEach((card, index) => {
             if(card.id === dragCard.id) {
                 dragCardIndex = index;
             }else if(dragCardIndex > -1){
                 // look for the next cards
                 if((card.number + 1) === tempCard.number){
+                    draggingCards.push(card);
                     tempCard = card;
                     if(index === cardsBoard.cards.length -1){
                         inOrder = true;
                         return;
                     }
-                }else{
+                }
+                else{
                     inOrder = false;
                     return;
                 }
             }
         });
-
     }
-    return inOrder;
+
+    if(inOrder) return draggingCards;
+    else return false
 }

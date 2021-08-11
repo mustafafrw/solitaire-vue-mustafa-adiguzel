@@ -2,7 +2,7 @@
   <div v-if="card" 
     class="card"
     :class="[ isLast ? 'card-last' : 'card-summary']"
-    @dragstart='startDrag($event, card)'
+    
   >
       <div v-if="card.open" class="card-open">
           <span class="card-number-top">{{ card.title }}</span>
@@ -20,9 +20,9 @@
           >{{ card.title }}</span>
       </div>
       <div 
-      v-else 
-      class="card-back"
-      :class="{ 'image-fill': isLast }"
+        v-else 
+        class="card-back"
+        :class="{ 'image-fill': isLast }"
       ></div>
   </div>
 </template>
@@ -38,19 +38,12 @@ export default {
             type: Boolean
         }
     },
-    methods: {
-        startDrag: (evt, card) => {
-            evt.dataTransfer.dropEffect = 'move'
-            evt.dataTransfer.effectAllowed = 'move'
-            evt.dataTransfer.setData('card', JSON.stringify(card))
-        },
-    }
 }
 </script>
 
 <style>
 .card {
-    width: 120px;
+    width: 7vw;
     
     /* background:linear-gradient(135deg, #E3E3E3 0%,#ced0d2 100%); */
     border-radius: 7px;
@@ -69,11 +62,11 @@ export default {
     
 }
 .card-last {
-    height: 160px;
+    height: 10vw;
     
 }
 .card-summary {
-    height: 40px;
+    height: 3vw;
 }
 .card-open {
     background:linear-gradient(135deg, #d9dadb 0%,#c4c6c9 100%);
@@ -87,6 +80,7 @@ export default {
    background-repeat: no-repeat;
    width: inherit;
    height: inherit;
+   background-size: cover;
 }
 .card span {
     position: absolute;
