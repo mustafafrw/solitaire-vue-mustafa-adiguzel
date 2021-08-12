@@ -60,13 +60,18 @@ export default {
   components: {
     Card,
     Board,
-    TableTop
+    TableTop,
   },
   data(){
     return {
         origin: null,
         draggingCards: null
     }
+  },
+  mounted(){
+    this.$toast.info('Error!',{
+      duration: 3000
+    });
   },
   computed: {
     boards(){
@@ -86,8 +91,6 @@ export default {
 
             this.draggingCards = orderedChilds(card, board)
 
-            e.dataTransfer.dropEffect = 'move'
-            e.dataTransfer.effectAllowed = 'move'
             e.dataTransfer.setData('cards', JSON.stringify(this.draggingCards))
             e.dataTransfer.setDragImage(new Image("0", "0"), -10, -10);
         }
@@ -134,7 +137,7 @@ export default {
 
          this.draggingCards.forEach(card => {
            const draggingCard = this.$refs[card.id][0]
-           draggingCard.removeAttribute('style')
+           if(draggingCard) draggingCard.removeAttribute('style')
          });
 
        }
@@ -143,7 +146,12 @@ export default {
 }
 </script>
 <style>
-
+.toaster-wrapper {
+  position: absolute !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  top: inherit !important;
+}
 .table-top {
   display: flex;
   justify-content: space-around;

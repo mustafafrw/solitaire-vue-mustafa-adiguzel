@@ -31,6 +31,26 @@ export default {
             }
         }
     },
+    pileComplete(state, payload){
+        const dropBoard = state.boards.find(board => board.id === payload.boardId);
+
+        if(dropBoard){
+            payload.cards.forEach(dropCard => {
+                dropBoard.cards = dropBoard.cards.filter(card => card.id !== dropCard.id);
+            })
+        }
+    },
+    openLastCard(state, payload){
+        const cardsBoard = state.boards.find(board => board.id === payload.boardId);
+
+        if(cardsBoard && cardsBoard.cards.length > 0){
+            const nextCard = cardsBoard.cards[cardsBoard.cards.length - 1];
+            if(!nextCard.open) {
+                nextCard.open = true;
+            }
+        }
+
+    },
     setBoards(state, payload){
         state.boards = payload;
     },

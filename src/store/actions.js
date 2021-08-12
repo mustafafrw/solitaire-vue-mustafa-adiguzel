@@ -1,13 +1,26 @@
 import { nanoid } from 'nanoid'
-import { cardTitle, createDeck, isMovable } from '@/util/Card'
+import { cardTitle, createDeck, isMovable, isPileCompleted } from '@/util/Card'
 
 export default {
     move({ commit }, payload){
         if(payload && payload.cards && payload.cards.length > 0 && payload.boardId){
             if(isMovable(payload.cards[0], payload.boardId)){
+                
                 commit('openNextCard', payload)
                 commit('removeFromBoard', payload)
                 commit('addToBoard', payload)
+
+                const pileComplete = isPileCompleted(payload.boardId)
+                if(pileComplete){
+
+                    const pileCompletedPayload = {
+                        cards: pileComplete,
+                        boardId: payload.boardId
+                    }
+                    commit('pileComplete', pileCompletedPayload)
+                    commit('openLastCard', pileCompletedPayload)
+
+                }
             }
         }
     },
@@ -56,5 +69,5 @@ export default {
             }
         }
     },
-    
+
 };

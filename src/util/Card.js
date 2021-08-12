@@ -1,4 +1,5 @@
-import mainModule from '@/store/index'
+// import mainModule from '@/store/index'
+import { getBoardwithCardId, getBoardwithId } from '@/util/functions'
 import { shuffle } from "lodash";
 
 export const cardTitle = (cardNumber) => {
@@ -18,14 +19,18 @@ export const createDeck = () => {
     return shuffle(deck)
 }
 
+
 export const isMovable = (dragCard, dropBoardId) => {
     console.log('dropBoardId', dropBoardId)
     
-    const cardsBoard = mainModule.state.boards.find(board => {
-        return board.cards.find(card => card.id === dragCard.id)
-    });
+    const cardsBoard = getBoardwithCardId(dragCard.id)
+    
+    // mainModule.state.boards.find(board => {
+    //     return board.cards.find(card => card.id === dragCard.id)
+    // });
 
-    const dropBoard = mainModule.state.boards.find(board => board.id === dropBoardId);
+    const dropBoard = getBoardwithId(dropBoardId)
+
     return (
            isLastCard(dragCard, cardsBoard) 
            || orderedChilds(dragCard, cardsBoard)
@@ -85,4 +90,21 @@ export const orderedChilds = (dragCard, cardsBoard) => {
 
     if(inOrder) return draggingCards;
     else return false
+}
+export const isPileCompleted = (boardId) => {
+    const board = getBoardwithId(boardId)
+
+    if(board.cards.length >= 13){
+
+        const Ks = board.cards.filter(card => card.number === 13 && card.open == true)
+
+        for(let i= 0; i<Ks.length; i++){
+            const card = Ks[i]
+            const ordered = orderedChilds(card, board)
+            if(ordered && ordered.length == 13) return ordered
+        }
+
+    }
+
+    return false;
 }
