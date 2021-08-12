@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 import { cardTitle, createDeck, isMovable, isPileCompleted } from '@/util/Card'
+import state from './state';
 
 export default {
     move({ commit }, payload){
@@ -17,19 +18,25 @@ export default {
                         cards: pileComplete,
                         boardId: payload.boardId
                     }
-                    commit('pileComplete', pileCompletedPayload)
-                    commit('openLastCard', pileCompletedPayload)
 
+                    commit('pileComplete', pileCompletedPayload)
+                    commit('increaseCompletedPiles')
+                    commit('openLastCard', pileCompletedPayload)
+                    
+                    if(state.completedPiles == 8){
+                        commit('gameOver')
+                    }
                 }
             }
         }
     },
-    init({ dispatch }){
+    init({ dispatch, commit }){
         // for(let i=1;i<=13;i++){
         //     const card = {
 
         //     }
         // }
+        commit('gameStart')
         dispatch('initBoards')
         dispatch('initCards')
     },

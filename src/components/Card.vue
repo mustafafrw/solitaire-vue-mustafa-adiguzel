@@ -1,5 +1,6 @@
 <template>
-  <div v-if="card" 
+  <div 
+    v-if="card" 
     class="card"
     :class="[ isLast ? 'card-last' : 'card-summary']"
     
@@ -63,7 +64,6 @@ export default {
 }
 .card-last {
     height: 10vw;
-    
 }
 .card-summary {
     height: 3vw;

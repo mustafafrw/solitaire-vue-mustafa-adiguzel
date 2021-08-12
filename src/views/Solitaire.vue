@@ -1,21 +1,7 @@
 <template>
   <div class="home">
     <TableTop />
-
-    <div class="table-deck">
-      
-      <div class="deck-card-container">
-        <div class="card card-last">
-          <div class="card-back image-fill">
-
-          </div>
-      </div>
-      </div>
-      <div class="placeholder-container">
-        <div v-for="index in 8" :key="`p-${ index }`" class="card card-placeholder">
-        </div>
-      </div>
-    </div>
+    <TableDeck />
 
     <div class="table-body">
       
@@ -53,6 +39,7 @@
 import Card from '@/components/Card'
 import Board from '@/components/Board'
 import TableTop from '@/components/Shared/TableTop'
+import TableDeck from '@/components/Shared/TableDeck'
 import { isLastCard, orderedChilds } from '@/util/Card'
 
 export default {
@@ -61,17 +48,13 @@ export default {
     Card,
     Board,
     TableTop,
+    TableDeck
   },
   data(){
     return {
         origin: null,
         draggingCards: null
     }
-  },
-  mounted(){
-    this.$toast.info('Error!',{
-      duration: 3000
-    });
   },
   computed: {
     boards(){
@@ -152,11 +135,7 @@ export default {
   bottom: 10px !important;
   top: inherit !important;
 }
-.table-top {
-  display: flex;
-  justify-content: space-around;
-  height: 40px;
-}
+
 .table-body {
   display: flex;
   flex-direction: row;

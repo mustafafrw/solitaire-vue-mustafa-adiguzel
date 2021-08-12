@@ -58,5 +58,14 @@ export default {
         if(payload.board && payload.card){
             payload.board.cards.push(payload.card);
         }
+    },
+    increaseCompletedPiles(state){
+        state.completedPiles++;
+    },
+    gameStart(state){
+        state.gameStatus = 'playing'
+    },
+    gameOver(state){
+        state.gameStatus = 'over'
     }
 };

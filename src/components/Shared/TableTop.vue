@@ -7,21 +7,40 @@
         </div>
         <div class="restart-container">
           <div>
-             Restart
+            <GButton
+                class="g-mx-10"
+            >Restart</GButton>
+            <GButton
+                class="g-mx-10"
+                variant="secondary"
+                @click="backToStartGame"
+            >Back</GButton>
           </div>
         </div>
   </div>
 </template>
 
 <script>
+import GButton from '@trendyol-js/grace/core/GButton';
+
 export default {
+    components: {
+        GButton
+    },
     data(){
         return {
             time: 0
         }
     },
+    computed: {
+        gameStatus(){
+            return this.$store.getters.gameStatus
+        }
+    },
     mounted(){
-        this.startTimer()
+        if(this.gameStatus){
+            this.startTimer()
+        }
     },
     methods: {
         startTimer(){
@@ -29,11 +48,20 @@ export default {
             setInterval(() => {
                 this.time +=1;
             }, 1000)
+        },
+        backToStartGame(){
+            this.$router.push('/')
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+.table-top {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  margin-bottom: 10px;
+  height: 60px;
+}
 </style>

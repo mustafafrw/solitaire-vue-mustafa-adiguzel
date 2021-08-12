@@ -1,4 +1,5 @@
 export default {
-    boards: [
-    ]
+    boards: [],
+    completedPiles: 0,
+    gameStatus: null
 }
