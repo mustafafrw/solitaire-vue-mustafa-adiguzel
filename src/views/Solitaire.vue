@@ -72,6 +72,11 @@ export default {
         if(card && board){
             this.setOrigin(e)
 
+            const previous = e.target.previousSibling.lastChild
+            
+            previous.setAttribute('class', "card card-last")
+            previous.style.position = "absolute"
+
             this.draggingCards = orderedChilds(card, board)
 
             e.dataTransfer.setData('cards', JSON.stringify(this.draggingCards))
@@ -98,17 +103,20 @@ export default {
               let css = "";
 
               if (e.pageX == 0) {
-                  css = `
+                  css = 
+                  `
                   z-index:9999;
                   transform:translate(0px,0px);
-                  display:none;`;
+                  display:none;
+                  `;
               } else {
                   css =
-                  `z-index:99999;
-                  overflow: visible;
+                  `
+                  z-index:99999;
                   position: sticky;
                   pointer-events: none;
-                  transform: scale(1.1, 1.1) rotate(0deg) translate(${ x }px, ${ y }px);`;
+                  transform: scale(1.1, 1.1) rotate(0deg) translate(${ x }px, ${ y }px);
+                  `;
               }
               draggingCard.style.cssText = css;
 

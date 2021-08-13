@@ -54,8 +54,9 @@ export default {
     font-weight: bold;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
-    position: relative;
 
+    position: relative;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
