@@ -9,6 +9,7 @@ export default {
         }
     },
     removeFromBoard(state, payload) {
+       
         const cardsBoard = state.boards.find(board => {
             return board.cards.find(card => card.id === payload.cards[0].id)
         });
@@ -32,6 +33,7 @@ export default {
         }
     },
     pileComplete(state, payload){
+
         const dropBoard = state.boards.find(board => board.id === payload.boardId);
 
         if(dropBoard){
@@ -54,13 +56,21 @@ export default {
     setBoards(state, payload){
         state.boards = payload;
     },
+    setSecondDeck(state, payload){
+        state.secondDeck = payload;
+    },
     pushCard(state, payload){
         if(payload.board && payload.card){
             payload.board.cards.push(payload.card);
         }
     },
     increaseCompletedPiles(state){
-        state.completedPiles++;
+        state.completedPiles = state.completedPiles + 1;
+        if(state.completedPiles != 8){
+            this._vm.$toast.success(`Pile ${ state.completedPiles } is completed!`,{
+                duration: 3000
+            });
+        } 
     },
     gameStart(state){
         state.gameStatus = 'playing'

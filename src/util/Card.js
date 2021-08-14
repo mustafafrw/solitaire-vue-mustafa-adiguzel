@@ -1,6 +1,7 @@
 // import mainModule from '@/store/index'
 import { getBoardwithCardId, getBoardwithId } from '@/util/functions'
 import { shuffle } from "lodash";
+import { nanoid } from 'nanoid'
 
 export const cardTitle = (cardNumber) => {
     if(cardNumber == 13) return 'K'
@@ -10,13 +11,31 @@ export const cardTitle = (cardNumber) => {
     else return cardNumber
 }
 
+export const getCardObject = (number, open) => {
+    return {
+        id: nanoid(),
+        number,
+        title: cardTitle(number),
+        open
+    }
+}
+
 export const createDeck = () => {
     let deck = Array.from({ length: 13 }, (_, i) => i + 1)
     deck = deck.concat(deck)
         .concat(deck)
         .concat(deck)
-    
-    return shuffle(deck)
+        .concat(deck)
+        .concat(deck)
+        .concat(deck)
+        .concat(deck)
+
+    deck = shuffle(deck)
+
+    return {
+        mainDeck : deck.slice(0,54),
+        secondDeck: deck.slice(54, deck.length),
+    }
 }
 
 

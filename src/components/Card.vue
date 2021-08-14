@@ -3,12 +3,10 @@
     v-if="card" 
     class="card"
     :class="[ isLast ? 'card-last' : 'card-summary']"
-    
   >
       <div v-if="card.open" class="card-open">
           <span class="card-number-top">{{ card.title }}</span>
           <div
-            v-if="isLast"
             class="card-symbol"
           >
               <span>
@@ -16,7 +14,6 @@
               </span>
           </div>
           <span
-            v-if="isLast"
             class="card-number-bottom"
           >{{ card.title }}</span>
       </div>
@@ -54,20 +51,23 @@ export default {
     font-weight: bold;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+    box-shadow: 0px -4px 3px rgba(0,0,0, 0.2);
 
     position: relative;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     
+    margin-bottom: -7vw;
 }
 .card-last {
     height: 10vw;
+    
 }
 .card-summary {
-    height: 3vw;
+    height: 10vw;
 }
 .card-open {
     background:linear-gradient(135deg, #d9dadb 0%,#c4c6c9 100%);

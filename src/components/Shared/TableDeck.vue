@@ -3,11 +3,20 @@
   <div class="table-deck">
       
       <div class="deck-card-container">
-        <div class="card card-last">
+        <div
+            v-if="secondDeckStatus" 
+            class="card card-last"
+            @click="openSecondDeck"
+        >
           <div class="card-back image-fill">
 
           </div>
-      </div>
+        </div>
+        <div v-else>
+            <div class="card card-placeholder">
+
+            </div>
+        </div>
       </div>
       <div class="placeholder-container">
         <div v-for="index in placeHolderCount" :key="`p-${ index }`" class="card card-placeholder">
@@ -45,6 +54,14 @@ export default {
         },
         placeHolderCount(){
             return 8 - this.completedPiles
+        },
+        secondDeckStatus(){
+            return this.$store.getters.secondDeckStatus
+        }
+    },
+    methods:{
+        openSecondDeck(){
+            this.$store.dispatch('openSeconDeck')
         }
     }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+
     <TableTop />
     <TableDeck />
 
@@ -7,23 +8,25 @@
       
       <Board v-for="board in boards" :key="board.id" :id="board.id">
         <div v-if="board && board.cards && board.cards.length > 0">
-        <div 
-            v-for="(card, index) in board.cards"
-            :key="card.id"
-            :ref="card.id"
-            :draggable="card.open && isLastCard(card, board) || childsInOrder(card, board)"
+          <transition-group name="card-list" tag="div">
+          <div 
+              v-for="(card, cardIndex) in board.cards"
+              :key="card.id"
+              :ref="card.id"
+              :draggable="card.open && isLastCard(card, board) || childsInOrder(card, board)"
 
-            @dragstart = "startDrag($event, card, board)"
-            @drag = "dragging($event)"
-            @dragend = "drop()"
-            @drop = "drop()"
-          >
-            <Card 
-              :card="card"
-              class='drag-el' 
-              :isLast="index == board.cards.length - 1 ? true : false"
-            />
-        </div>
+              @dragstart = "startDrag($event, cardIndex, card, board)"
+              @drag = "dragging($event)"
+              @dragend = "drop()"
+              @drop = "drop()"
+            >
+              <Card 
+                :card="card"
+                :isLast="isLast(cardIndex, board)"
+              />
+          </div>
+          </transition-group>
+         
         </div>
         <div v-else class="card card-placeholder">
           
@@ -53,7 +56,8 @@ export default {
   data(){
     return {
         origin: null,
-        draggingCards: null
+        draggingCards: null,
+        previousCard: null
     }
   },
   computed: {
@@ -62,20 +66,19 @@ export default {
     },
   },
   methods: {
+    isLast(cardIndex, board){
+       if(cardIndex === board.cards.length - 1) return true;
+    },
     childsInOrder(card, board){
       return orderedChilds(card, board)
     },
     isLastCard(card, board){
       return isLastCard(card, board)
     },
-    startDrag(e, card, board) {
+    startDrag(e, cardIndex, card, board) {
         if(card && board){
-            this.setOrigin(e)
 
-            const previous = e.target.previousSibling.lastChild
-            
-            previous.setAttribute('class', "card card-last")
-            previous.style.position = "absolute"
+            this.setOrigin(e)
 
             this.draggingCards = orderedChilds(card, board)
 
@@ -125,7 +128,7 @@ export default {
     },
     drop(){
        if(this.draggingCards && this.draggingCards.length > 0){
-
+         
          this.draggingCards.forEach(card => {
            const draggingCard = this.$refs[card.id][0]
            if(draggingCard) draggingCard.removeAttribute('style')
@@ -137,6 +140,12 @@ export default {
 }
 </script>
 <style>
+.card-list-enter-active {
+  transition: all 0.5s;
+}
+.card-list-enter{
+  opacity: 0.5;
+}
 .toaster-wrapper {
   position: absolute !important;
   right: 10px !important;
@@ -173,6 +182,6 @@ export default {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 10vw;
 }
 </style>

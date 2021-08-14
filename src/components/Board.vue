@@ -33,6 +33,7 @@ export default {
 
 <style>
 .board {
+    
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid'
-import { cardTitle, createDeck, isMovable, isPileCompleted } from '@/util/Card'
+import { getCardObject, createDeck, isMovable, isPileCompleted } from '@/util/Card'
 import state from './state';
 
 export default {
@@ -10,7 +9,7 @@ export default {
                 commit('openNextCard', payload)
                 commit('removeFromBoard', payload)
                 commit('addToBoard', payload)
-
+                
                 const pileComplete = isPileCompleted(payload.boardId)
                 if(pileComplete){
 
@@ -26,6 +25,24 @@ export default {
                     if(state.completedPiles == 8){
                         commit('gameOver')
                     }
+                }
+            }
+        }
+    },
+    openSeconDeck({ state, commit }){
+        if(state.secondDeck && state.secondDeck.length > 0){
+            for(let i=0;i<state.boards.length;i++){
+                const lastCard = state.secondDeck.pop()
+                
+                if(lastCard){
+                    const card = getCardObject(lastCard, true)
+                    
+                    const payload = {
+                        board: state.boards[i],
+                        card
+                    }
+
+                    commit('pushCard', payload)
                 }
             }
         }
@@ -52,19 +69,15 @@ export default {
         commit('setBoards', boards)
     },
     initCards({ commit, state }){
-        const deck = createDeck();
+        const { mainDeck, secondDeck } = createDeck();
+        commit('setSecondDeck', secondDeck)
 
-        while(deck.length > 0){
+        while(mainDeck.length > 0){
             for(let i=0;i<state.boards.length;i++){
-                const lastCard = deck.pop()
+                const lastCard = mainDeck.pop()
                 
                 if(lastCard){
-                    const card = {
-                        id: nanoid(),
-                        number: lastCard,
-                        title: cardTitle(lastCard),
-                        open: deck.length > 11 ? false : true
-                    }
+                    const card = getCardObject(lastCard, mainDeck.length > 13 ? false : true)
                     
                     const payload = {
                         board: state.boards[i],

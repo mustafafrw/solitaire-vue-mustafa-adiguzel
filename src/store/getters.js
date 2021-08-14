@@ -8,4 +8,7 @@ export default {
     gameStatus(state){
         return state.gameStatus;
     },
+    secondDeckStatus(state){
+        return state.secondDeck && state.secondDeck.length > 0 ? true : false;
+    },
 };
