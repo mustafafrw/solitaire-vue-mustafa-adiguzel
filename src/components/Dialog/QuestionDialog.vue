@@ -1,12 +1,12 @@
 <template>
   <GBox>
-  <GModal :title="title" :value="showDialog" @close="closeDialog">
+  <GModal :title="title" :value="showDialog" @close="dialogState">
         <template #body>
         <GText variant="body">{{ description }}</GText>
         </template>
         <template #footer>
         <GButton variant="secondary" @click="agreed">Yes</GButton>
-        <GButton variant="danger" @click="closeDialog" class="g-ml-10">No</GButton>
+        <GButton variant="danger" @click="dialogState" class="g-ml-10">No</GButton>
         </template>
     </GModal>
   </GBox>
@@ -25,7 +25,7 @@ export default {
         GBox
     },
     props: {
-        showDialog: {
+        dialogState: {
             type: Boolean,
             default: false
         }

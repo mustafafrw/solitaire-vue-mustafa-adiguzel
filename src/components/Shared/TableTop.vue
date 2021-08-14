@@ -14,15 +14,15 @@
             <GButton
                 class="g-mx-10"
                 variant="secondary"
-                @click="backResult = true"
+                @click="dialogState = true"
             >Back</GButton>
           </div>
         </div>
         
     </div>
     <QuestionDialog 
-        :showDialog= "backResult" 
-        @close = "backResult = false"
+        :showDialog= "dialogState" 
+        @close = "dialogState = false"
         @agree = "backToStartGame"
     />
   </div>
@@ -39,7 +39,7 @@ export default {
     data(){
         return {
             time: 0,
-            backResult: false,
+            dialogState: false,
         }
     },
     computed: {
@@ -60,7 +60,7 @@ export default {
             }, 1000)
         },
         backToStartGame(){
-            this.backResult = false
+            this.dialogState = false
             this.$router.push('/')
         }
     }

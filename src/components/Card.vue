@@ -2,7 +2,6 @@
   <div 
     v-if="card" 
     class="card"
-    :class="[ isLast ? 'card-last' : 'card-summary']"
   >
       <div v-if="card.open" class="card-open">
           <span class="card-number-top">{{ card.title }}</span>
@@ -19,8 +18,7 @@
       </div>
       <div 
         v-else 
-        class="card-back"
-        :class="{ 'image-fill': isLast }"
+        class="card-back image-fill"
       ></div>
   </div>
 </template>
@@ -42,7 +40,7 @@ export default {
 <style>
 .card {
     width: 7vw;
-    
+    height: 10vw;
     /* background:linear-gradient(135deg, #E3E3E3 0%,#ced0d2 100%); */
     border-radius: 7px;
     background-repeat: no-repeat;
@@ -61,13 +59,6 @@ export default {
     align-items: center;
     
     margin-bottom: -8vw;
-}
-.card-last {
-    height: 10vw;
-    
-}
-.card-summary {
-    height: 10vw;
 }
 .card-open {
     background:linear-gradient(135deg, #d9dadb 0%,#c4c6c9 100%);
