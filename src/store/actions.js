@@ -53,6 +53,7 @@ export default {
 
         //     }
         // }
+        commit('initCompletedPiles')
         commit('gameStart')
         dispatch('initBoards')
         dispatch('initCards')

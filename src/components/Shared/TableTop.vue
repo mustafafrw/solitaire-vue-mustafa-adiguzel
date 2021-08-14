@@ -1,5 +1,6 @@
 <template>
-  <div class="table-top">
+  <div>
+      <div class="table-top">
         <div class="time-container">
           <div>
              {{ time }}
@@ -13,23 +14,32 @@
             <GButton
                 class="g-mx-10"
                 variant="secondary"
-                @click="backToStartGame"
+                @click="backResult = true"
             >Back</GButton>
           </div>
         </div>
+        
+    </div>
+    <QuestionDialog 
+        :showDialog= "backResult" 
+        @close = "backResult = false"
+        @agree = "backToStartGame"
+    />
   </div>
 </template>
 
 <script>
 import GButton from '@trendyol-js/grace/core/GButton';
-
+import QuestionDialog from '@/components/Dialog/QuestionDialog';
 export default {
     components: {
-        GButton
+        GButton,
+        QuestionDialog
     },
     data(){
         return {
-            time: 0
+            time: 0,
+            backResult: false,
         }
     },
     computed: {
@@ -50,6 +60,7 @@ export default {
             }, 1000)
         },
         backToStartGame(){
+            this.backResult = false
             this.$router.push('/')
         }
     }

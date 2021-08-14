@@ -60,7 +60,7 @@ export default {
     justify-content: center;
     align-items: center;
     
-    margin-bottom: -7vw;
+    margin-bottom: -8vw;
 }
 .card-last {
     height: 10vw;

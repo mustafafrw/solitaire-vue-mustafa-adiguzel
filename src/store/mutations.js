@@ -72,6 +72,9 @@ export default {
             });
         } 
     },
+    initCompletedPiles(state){
+        state.completedPiles = 0
+    },
     gameStart(state){
         state.gameStatus = 'playing'
     },
