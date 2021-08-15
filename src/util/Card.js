@@ -2,6 +2,7 @@
 import { getBoardwithCardId, getBoardwithId } from '@/util/functions'
 import { shuffle } from "lodash";
 import { nanoid } from 'nanoid'
+import mainModule from '@/store/index'
 
 export const cardTitle = (cardNumber) => {
     if(cardNumber == 13) return 'K'
@@ -40,13 +41,8 @@ export const createDeck = () => {
 
 
 export const isMovable = (dragCard, dropBoardId) => {
-    console.log('dropBoardId', dropBoardId)
     
     const cardsBoard = getBoardwithCardId(dragCard.id)
-    
-    // mainModule.state.boards.find(board => {
-    //     return board.cards.find(card => card.id === dragCard.id)
-    // });
 
     const dropBoard = getBoardwithId(dropBoardId)
 
@@ -66,9 +62,11 @@ export const isLastCard = (dragCard, cardsBoard) => {
 }
 
 export const isChildCard = (dragCard, dropBoard) => {
+    const incrementRule = mainModule.state.gameRules.increment;
+
     if(dropBoard.cards.length > 0){
         const lastCardObject = dropBoard.cards[dropBoard.cards.length - 1]
-        if(lastCardObject && lastCardObject.number === dragCard.number + 1) return true
+        if(lastCardObject && lastCardObject.number === (dragCard.number + incrementRule)) return true
     }else{
         return true
     }
@@ -82,6 +80,7 @@ export const orderedChilds = (dragCard, cardsBoard) => {
         return draggingCards 
     }
     else if(cardsBoard.cards.length > 0){
+        const incrementRule = mainModule.state.gameRules.increment;
 
         let dragCardIndex = -1;
         let tempCard = dragCard;
@@ -91,7 +90,7 @@ export const orderedChilds = (dragCard, cardsBoard) => {
                 dragCardIndex = index;
             }else if(dragCardIndex > -1){
                 // look for the next cards
-                if((card.number + 1) === tempCard.number){
+                if((card.number + incrementRule) === tempCard.number){
                     draggingCards.push(card);
                     tempCard = card;
                     if(index === cardsBoard.cards.length -1){
@@ -114,11 +113,12 @@ export const isPileCompleted = (boardId) => {
     const board = getBoardwithId(boardId)
 
     if(board.cards.length >= 13){
+        const firstCardNumberRule = mainModule.state.gameRules.firstCardNumber;
 
-        const Ks = board.cards.filter(card => card.number === 13 && card.open == true)
+        const firstCards = board.cards.filter(card => card.number === firstCardNumberRule && card.open == true)
 
-        for(let i= 0; i<Ks.length; i++){
-            const card = Ks[i]
+        for(let i= 0; i<firstCards.length; i++){
+            const card = firstCards[i]
             const ordered = orderedChilds(card, board)
             if(ordered && ordered.length == 13) return ordered
         }

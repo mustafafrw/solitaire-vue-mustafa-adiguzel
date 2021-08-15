@@ -2,44 +2,57 @@
   <div>
       <div class="table-top">
         <div class="time-container">
-          <div>
-             {{ time }}
+          <div class="time-text">
+            <img src="time-icon.svg" alt="">
+            <span>
+                {{ seconds | secondToDisplayTime }}
+            </span>
           </div>
         </div>
         <div class="restart-container">
           <div>
             <GButton
                 class="g-mx-10"
+                variant="secondary"
+                @click="restartDialogState = true"
             >Restart</GButton>
             <GButton
                 class="g-mx-10"
                 variant="secondary"
-                @click="dialogState = true"
+                @click="backDialogState = true"
             >Back</GButton>
           </div>
         </div>
         
     </div>
-    <QuestionDialog 
-        :showDialog= "dialogState" 
-        @close = "dialogState = false"
+    <BackDialog 
+        :dialogState= "backDialogState"
+        @close = "backDialogState = false"
         @agree = "backToStartGame"
+    />
+    <RestartDialog 
+        :dialogState= "restartDialogState"
+        @close = "restartDialogState = false"
+        @agree = "restartGame"
     />
   </div>
 </template>
 
 <script>
 import GButton from '@trendyol-js/grace/core/GButton';
-import QuestionDialog from '@/components/Dialog/QuestionDialog';
+import BackDialog from '@/components/Dialog/BackDialog';
+import RestartDialog from '@/components/Dialog/RestartDialog';
 export default {
     components: {
         GButton,
-        QuestionDialog
+        BackDialog,
+        RestartDialog
     },
     data(){
         return {
-            time: 0,
-            dialogState: false,
+            seconds: 0,
+            backDialogState: false,
+            restartDialogState: false
         }
     },
     computed: {
@@ -54,14 +67,36 @@ export default {
     },
     methods: {
         startTimer(){
-            this.time = 0;
+            this.seconds = 0;
             setInterval(() => {
-                this.time +=1;
+                this.seconds +=1;
             }, 1000)
         },
         backToStartGame(){
-            this.dialogState = false
+            this.backDialogState = false
             this.$router.push('/')
+        },
+        restartGame(){
+            this.restartDialogState = false
+            this.$store.dispatch('startSolitaire')
+        }
+    },
+    filters: {
+        secondToDisplayTime(val){
+            if(val < 60){
+                let sec = val;
+                if(sec < 10) sec = `0${ sec }`;
+                
+                return `00:${ sec }`
+            }else{
+                let min = Math.floor(val / 60);
+                if(min < 10) min = `0${ min }`;
+
+                let sec = val % 60;
+                if(sec < 10) sec = `0${ sec }`;
+
+                return `${ min }:${ sec }`
+            }
         }
     }
 }
@@ -70,9 +105,26 @@ export default {
 <style scoped>
 .table-top {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 10px;
   margin-bottom: 10px;
   height: 60px;
+}
+.time-text  {
+    width: 200px;
+}
+.time-text span {
+    position: absolute;
+    top: 18px;
+    font-weight: 600;
+    font-size: 1.5em;
+    color: #fff;
+}
+.time-text img {
+    display: inline;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
 }
 </style>

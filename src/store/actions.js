@@ -2,6 +2,24 @@ import { getCardObject, createDeck, isMovable, isPileCompleted } from '@/util/Ca
 import state from './state';
 
 export default {
+    startSolitaire({ commit, dispatch }){
+        commit('setGameName', 'normalSolitaire')
+        commit('setGameRules', 'normalSolitaire')
+        
+        dispatch('init')
+        this._vm.$toast.info('The game has started, good luck!',{
+            duration: 3000
+        }); 
+    },
+    startReverseSolitaire({ commit, dispatch }){
+        commit('setGameName', 'reverseSolitaire')
+        commit('setGameRules', 'reverseSolitaire')
+        
+        dispatch('init')
+        this._vm.$toast.info('The game has started, good luck!',{
+            duration: 3000
+        }); 
+    },
     move({ commit }, payload){
         if(payload && payload.cards && payload.cards.length > 0 && payload.boardId){
             if(isMovable(payload.cards[0], payload.boardId)){

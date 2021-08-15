@@ -28,6 +28,7 @@
                     size="big"
                     variant="secondary"
                     leftIcon="play"
+                    @click="startReverseSolitaire"
                 >Play</GButton>
             </template>
         </GTooltip>
@@ -49,11 +50,12 @@ export default {
     },
     methods: {
         startSolitaire(){
-            this.$store.dispatch('init')
+            this.$store.dispatch('startSolitaire')
             this.$router.push('/play')
-            this.$toast.info('Good luck !',{
-                duration: 3000
-            }); 
+        },
+        startReverseSolitaire(){
+            this.$store.dispatch('startReverseSolitaire')
+            this.$router.push('/play')
         }
     }
 }
