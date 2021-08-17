@@ -9,7 +9,7 @@
             </span>
           </div>
         </div>
-        <div class="restart-container">
+        <div class="navigation-container">
           <div>
             <GButton
                 class="g-mx-10"

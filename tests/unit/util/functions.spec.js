@@ -1,8 +1,10 @@
 import 
 {   
-    getGameRules
+    getGameRules,
+    getBoardwithId
 } 
 from '@/util/functions'
+import mainModule from '@/store/index'
 
 describe("Card utility functions tests - functions", () => {
     it("should return game rules", () => {
@@ -25,5 +27,14 @@ describe("Card utility functions tests - functions", () => {
 
         expect(gameRules.increment)
             .toEqual(expectedIncrement)
+    })
+    it("should get board with id", () => {
+        mainModule.dispatch('startSolitaire')
+
+        const board = getBoardwithId("board-1")
+        
+        expect(board)
+            .not
+            .toBeNull()
     })
 })
