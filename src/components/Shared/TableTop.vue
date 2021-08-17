@@ -52,7 +52,8 @@ export default {
         return {
             seconds: 0,
             backDialogState: false,
-            restartDialogState: false
+            restartDialogState: false,
+            timer: null
         }
     },
     computed: {
@@ -60,17 +61,30 @@ export default {
             return this.$store.getters.gameStatus
         }
     },
+    watch: {
+        gameStatus(val){
+            if(val ==='over'){
+                this.stopTimer()
+            }
+        }
+    },
     mounted(){
-        if(this.gameStatus){
+        if(this.gameStatus === 'playing'){
             this.startTimer()
         }
     },
     methods: {
         startTimer(){
+            this.stopTimer();
             this.seconds = 0;
-            setInterval(() => {
+            this.timer = setInterval(() => {
                 this.seconds +=1;
             }, 1000)
+        },
+        stopTimer(){
+            if(this.timer){
+                clearInterval(this.timer);
+            }
         },
         backToStartGame(){
             this.backDialogState = false
@@ -79,6 +93,7 @@ export default {
         restartGame(){
             this.restartDialogState = false
             this.$store.dispatch('startSolitaire')
+            this.startTimer()
         }
     },
     filters: {
@@ -123,7 +138,6 @@ export default {
 .time-text img {
     display: inline;
     margin-top: 5px;
-    width: 30px;
     height: 30px;
     color: #fff;
 }

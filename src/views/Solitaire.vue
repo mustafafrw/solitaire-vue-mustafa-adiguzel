@@ -2,9 +2,10 @@
   <div class="home">
 
     <TableTop />
-    <TableDeck />
 
-    <div class="table-body">
+    <TableDeck v-if="gameStatus === 'playing'" />
+
+    <div v-if="gameStatus === 'playing'" class="table-body">
       
       <Board v-for="board in boards" :key="board.id" :id="board.id">
         <div v-if="board && board.cards && board.cards.length > 0">
@@ -35,6 +36,7 @@
       
     </div>
     
+     <GameOver v-if="gameStatus === 'over'" />
   </div>
 </template>
 
@@ -43,6 +45,7 @@ import Card from '@/components/Card'
 import Board from '@/components/Board'
 import TableTop from '@/components/Shared/TableTop'
 import TableDeck from '@/components/Shared/TableDeck'
+import GameOver from '@/components/Shared/GameOver'
 import { isLastCard, orderedChilds } from '@/util/Card'
 
 export default {
@@ -51,7 +54,8 @@ export default {
     Card,
     Board,
     TableTop,
-    TableDeck
+    TableDeck,
+    GameOver
   },
   data(){
     return {
@@ -64,6 +68,9 @@ export default {
     boards(){
       return this.$store.getters.getBoards
     },
+    gameStatus(){
+        return this.$store.getters.gameStatus
+    }
   },
   methods: {
     isLast(cardIndex, board){
@@ -115,7 +122,7 @@ export default {
               } else {
                   css =
                   `
-                  z-index:99999;
+                  z-index: 99999;
                   position: sticky;
                   pointer-events: none;
                   transform: scale(1.1, 1.1) rotate(0deg) translate(${ x }px, ${ y }px);
