@@ -91,13 +91,18 @@ export const orderedChilds = (dragCard, cardsBoard) => {
                 if(card.id === dragCard.id){
                     dragCardIndex = index;
                 }
-            }else{
+            }
+            else{
                 if((card.number + incrementRule) === tempCard.number){
                     draggingCards.push(card);
+
                     tempCard = card;
                     if(index === cardsBoard.cards.length -1){
                         return draggingCards;
                     }
+
+                }else{
+                    return false;
                 }
             }
         }
@@ -109,14 +114,19 @@ export const isPileCompleted = (boardId) => {
     const board = getBoardwithId(boardId)
 
     if(board.cards.length >= 13){
+
         const firstCardNumberRule = mainModule.state.gameRules.firstCardNumber;
 
         const firstCards = board.cards.filter(card => card.number === firstCardNumberRule && card.open == true)
 
         for(let i= 0; i<firstCards.length; i++){
+
             const card = firstCards[i]
             const ordered = orderedChilds(card, board)
-            if(ordered && ordered.length == 13) return ordered
+            if(ordered && ordered.length == 13){
+                return ordered
+            }
+
         }
 
     }
@@ -147,7 +157,7 @@ export const getHint = () => {
             ])
         }
     }
-    
+
     if(hints.length > 0){
         return shuffle(hints)[0]
     }
