@@ -1,0 +1,43 @@
+.table-top {
+    @include flexCenter();
+
+    padding: 10px;
+    margin-bottom: 10px;
+    .time-text {
+        width: 120px;
+        span {
+            position: absolute;
+            top: 18px;
+            font-weight: 600;
+            font-size: 1.5em;
+            color: $textColorPrimary;
+        }
+        img {
+            margin-top: 5px;
+            height: 30px;
+        }
+    }
+}
+
+.table-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-deck {
+    @include flexCenter();
+
+    width: 100%;
+    margin-bottom: 10vw;
+    .deck-card-container{
+        @include flexCenter();
+        
+        width: 20%;
+    }
+    .placeholder-container {
+        @include flexCenter();
+        
+        justify-content: space-around;
+        width: 80%;
+    }
+}

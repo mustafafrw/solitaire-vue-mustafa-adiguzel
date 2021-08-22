@@ -22,3 +22,13 @@ export const getGameRules = (gameName) => {
     }
     return gameRules[gameName]
 }
+export const lastCardsInBoards = () => {
+    const boards = mainModule.getters.getBoards;
+    let lastCards = [];
+    boards.forEach(board => {
+        if(board.cards.length > 0){
+            lastCards.push(board.cards[board.cards.length - 1]);
+        }
+    });
+    return lastCards;
+}

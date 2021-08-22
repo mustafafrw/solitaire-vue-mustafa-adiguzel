@@ -1,5 +1,5 @@
 <template>
-  <GBox>
+  <GBox v-if="dialogState">
   <GModal :title="title" :value="dialogState" @close="closeDialog">
         <template #body>
         <GText variant="body">{{ description }}</GText>

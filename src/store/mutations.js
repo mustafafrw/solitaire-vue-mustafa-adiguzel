@@ -70,11 +70,6 @@ export default {
     },
     increaseCompletedPiles(state){
         state.completedPiles = state.completedPiles + 1;
-        if(state.completedPiles != 8){
-            this._vm.$toast.success(`Pile ${ state.completedPiles } is completed!`,{
-                duration: 3000
-            });
-        } 
     },
     initCompletedPiles(state){
         state.completedPiles = 0
@@ -84,5 +79,12 @@ export default {
     },
     gameOver(state){
         state.gameStatus = 'over'
+    },
+    showToast(state, payload){
+        if(this._vm.$toast){
+            this._vm.$toast[payload.type](payload.message,{
+                duration: 3000
+            });
+        }
     }
 };

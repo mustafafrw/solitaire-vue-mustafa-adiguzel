@@ -42,6 +42,7 @@
 import GButton from '@trendyol-js/grace/core/GButton';
 import BackDialog from '@/components/Dialog/BackDialog';
 import RestartDialog from '@/components/Dialog/RestartDialog';
+
 export default {
     components: {
         GButton,
@@ -116,29 +117,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.table-top {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  height: 60px;
-}
-.time-text  {
-    width: 200px;
-}
-.time-text span {
-    position: absolute;
-    top: 18px;
-    font-weight: 600;
-    font-size: 1.5em;
-    color: #fff;
-}
-.time-text img {
-    display: inline;
-    margin-top: 5px;
-    height: 30px;
-    color: #fff;
-}
-</style>

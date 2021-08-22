@@ -1,0 +1,62 @@
+.card {
+    position: relative;
+
+    width: 7vw;
+    height: 10vw;
+
+    border-radius: 7px;
+    
+    font-size: 17px;
+    font-weight: bold;
+
+    font-family: $cardFontFamily;
+    
+    box-shadow: $boxShadow;
+    color: $textColorSecondary;
+    margin-bottom: -8vw;
+    .card-open {
+        background: $cardBackground;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        cursor: pointer;
+        span {
+            position: absolute;
+            text-align: center;
+        }
+        &:hover{
+            background: $cardBackgroundHover;
+        }
+        .card-number-top {
+            top: 2px;
+            left: 10px;
+        }
+        .card-number-bottom {
+            bottom: 2px;
+            right: 10px;
+            -ms-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        .card-symbol{
+            @include flexCenter();
+
+            font-size: 25px;
+            color: $textColorSecondary;
+            width: 100%;
+            height: 100%;
+         }
+    }
+    .card-back {
+        background-image: url('/card_back.webp');
+        background-repeat: no-repeat;
+        width: inherit;
+        height: inherit;
+        background-size: 100% 100%;
+    }
+}
+
+.card-placeholder{
+  border: 3px groove #d6d6d6;
+}

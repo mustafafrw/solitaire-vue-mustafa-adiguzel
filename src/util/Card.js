@@ -1,6 +1,6 @@
 // import mainModule from '@/store/index'
-import { getBoardwithCardId, getBoardwithId } from '@/util/functions'
-import { shuffle } from "lodash";
+import { getBoardwithCardId, getBoardwithId, lastCardsInBoards } from '@/util/functions'
+import { shuffle, orderBy } from "lodash";
 import { nanoid } from 'nanoid'
 import mainModule from '@/store/index'
 
@@ -41,7 +41,8 @@ export const createDeck = () => {
 
 
 export const isMovable = (dragCard, dropBoardId) => {
-    
+    if(!dragCard.open) return false
+
     const cardsBoard = getBoardwithCardId(dragCard.id)
 
     const dropBoard = getBoardwithId(dropBoardId)
@@ -75,7 +76,6 @@ export const isChildCard = (dragCard, dropBoard) => {
 export const orderedChilds = (dragCard, cardsBoard) => {
     let draggingCards = [dragCard]
 
-    let inOrder = false;
     if(isLastCard(dragCard, cardsBoard)){ 
         return draggingCards 
     }
@@ -84,31 +84,27 @@ export const orderedChilds = (dragCard, cardsBoard) => {
 
         let dragCardIndex = -1;
         let tempCard = dragCard;
-
-        cardsBoard.cards.forEach((card, index) => {
-            if(card.id === dragCard.id) {
-                dragCardIndex = index;
-            }else if(dragCardIndex > -1){
-                // look for the next cards
+        
+        for(let index = 0; index < cardsBoard.cards.length; index++){
+            let card = cardsBoard.cards[index];
+            if(dragCardIndex === -1){
+                if(card.id === dragCard.id){
+                    dragCardIndex = index;
+                }
+            }else{
                 if((card.number + incrementRule) === tempCard.number){
                     draggingCards.push(card);
                     tempCard = card;
                     if(index === cardsBoard.cards.length -1){
-                        inOrder = true;
-                        return;
+                        return draggingCards;
                     }
                 }
-                else{
-                    inOrder = false;
-                    return;
-                }
             }
-        });
+        }
+        return false
     }
-
-    if(inOrder) return draggingCards;
-    else return false
 }
+
 export const isPileCompleted = (boardId) => {
     const board = getBoardwithId(boardId)
 
@@ -126,4 +122,33 @@ export const isPileCompleted = (boardId) => {
     }
 
     return false;
+}
+
+export const getHint = () => {
+    let lastCards = lastCardsInBoards();
+
+    const incrementRule = mainModule.state.gameRules.increment;
+
+    if(incrementRule > 0)
+        lastCards = orderBy(lastCards, ['number'],['desc']);
+    else
+        lastCards = orderBy(lastCards, ['number'],['asc']);
+
+    let hints = []
+    for(let i=0; i < lastCards.length -1; i++){
+
+        const card = lastCards[i];
+        const nextCard = lastCards[i+1];
+
+        if(card.number === (nextCard.number + incrementRule)){
+            hints.push([
+                card,
+                nextCard
+            ])
+        }
+    }
+    
+    if(hints.length > 0){
+        return shuffle(hints)[0]
+    }
 }

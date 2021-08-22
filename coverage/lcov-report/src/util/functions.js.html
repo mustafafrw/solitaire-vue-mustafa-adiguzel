@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">68.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>13/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.29% </span>
+                <span class="strong">77.78% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/9</span>
+                <span class='fraction'>10/16</span>
             </div>
         
             
@@ -79,20 +79,29 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,17 +110,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import mainModule from '@/store/index'
 &nbsp;
-export const getBoard = <span class="fstat-no" title="function not covered" >(f</span>indFunction) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return mainModule.state.boards.find(findFunction);</span>
+export const getBoard = (findFunction) =&gt; {
+    return mainModule.state.boards.find(findFunction);
 }
-export const getBoardwithId = <span class="fstat-no" title="function not covered" >(b</span>oardId) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return getBoard(<span class="fstat-no" title="function not covered" >bo</span>ard =&gt; <span class="cstat-no" title="statement not covered" >board.id === boardId)</span>;</span>
+export const getBoardwithId = (boardId) =&gt; {
+    return getBoard(board =&gt; board.id === boardId);
 }
-export const getBoardwithCardId = <span class="fstat-no" title="function not covered" >(c</span>ardId) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return getBoard(<span class="fstat-no" title="function not covered" >bo</span>ard =&gt; <span class="cstat-no" title="statement not covered" >board.cards.find(<span class="fstat-no" title="function not covered" >ca</span>rd =&gt; <span class="cstat-no" title="statement not covered" >card.id === cardId)</span>)</span>;</span>
+export const getBoardwithCardId = (cardId) =&gt; {
+    return getBoard(board =&gt; board.cards.find(card =&gt; card.id === cardId));
 }
 export const getGameRules = (gameName) =&gt; {
     const gameRules = {
@@ -125,6 +145,16 @@ export const getGameRules = (gameName) =&gt; {
         }
     }
     return gameRules[gameName]
+}
+export const lastCardsInBoards = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const boards = <span class="cstat-no" title="statement not covered" >mainModule.getters.getBoards;</span>
+    let lastCards = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    boards.forEach(<span class="fstat-no" title="function not covered" >bo</span>ard =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if(board.cards.length &gt; 0){</span>
+<span class="cstat-no" title="statement not covered" >            lastCards.push(board.cards[board.cards.length - 1]);</span>
+        }
+    });
+<span class="cstat-no" title="statement not covered" >    return lastCards;</span>
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -132,7 +162,7 @@ export const getGameRules = (gameName) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 17 2021 11:58:51 GMT+0300 (GMT+03:00)
+                at Sun Aug 22 2021 13:33:42 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="..\..\prettify.js"></script>

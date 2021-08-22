@@ -1,5 +1,4 @@
 import { getCardObject, createDeck, isMovable, isPileCompleted } from '@/util/Card'
-import state from './state';
 
 export default {
     startSolitaire({ commit, dispatch }){
@@ -15,30 +14,44 @@ export default {
         
         dispatch('init')
     },
-    move({ commit }, payload){
+    move({ commit, dispatch  }, payload){
         if(payload && payload.cards && payload.cards.length > 0 && payload.boardId){
             if(isMovable(payload.cards[0], payload.boardId)){
                 
                 commit('openNextCard', payload)
                 commit('removeFromBoard', payload)
                 commit('addToBoard', payload)
+
+                dispatch('checkCompletedPiles', payload.boardId)
                 
-                const pileComplete = isPileCompleted(payload.boardId)
-                if(pileComplete){
+            }
+        }
+    },
+    checkCompletedPiles({ commit, state }, boardId){
+        const pileComplete = isPileCompleted(boardId)
 
-                    const pileCompletedPayload = {
-                        cards: pileComplete,
-                        boardId: payload.boardId
-                    }
+        if(pileComplete){
+            const pileCompletedPayload = {
+                cards: pileComplete,
+                boardId
+            }
 
-                    commit('pileComplete', pileCompletedPayload)
-                    commit('increaseCompletedPiles')
-                    commit('openLastCard', pileCompletedPayload)
-                    
-                    if(state.completedPiles == 8){
-                        commit('gameOver')
-                    }
-                }
+            commit('pileComplete', pileCompletedPayload)
+            commit('increaseCompletedPiles')
+            commit('openLastCard', pileCompletedPayload)
+            
+            if(state.completedPiles == 8){
+                commit('gameOver')
+                commit('showToast', {
+                    type: 'success',
+                    message: `Game completed succesfully! Congratulations.`
+                })
+            }
+            else{
+                commit('showToast', {
+                    type: 'success',
+                    message: `Pile ${ state.completedPiles } is completed!`
+                })
             }
         }
     },
@@ -61,16 +74,10 @@ export default {
         }
     },
     init({ dispatch, commit }){
-        // for(let i=1;i<=13;i++){
-        //     const card = {
-
-        //     }
-        // }
-        if(this._vm.$toast){
-            this._vm.$toast.info('The game has started, good luck!',{
-                duration: 3000
-            });
-        }
+        commit('showToast', {
+            type: 'info',
+            message: 'The game has started, good luck!'
+        })
         commit('initCompletedPiles')
         commit('gameStart')
         dispatch('initBoards')
@@ -108,5 +115,4 @@ export default {
             }
         }
     },
-
 };

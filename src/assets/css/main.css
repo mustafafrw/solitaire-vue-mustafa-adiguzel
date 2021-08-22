@@ -1,0 +1,201 @@
+html {
+  background: linear-gradient(135deg, #604176 0%, #5e2563 100%);
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #4078c0;
+}
+
+.card-list-enter-active {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.card-list-enter {
+  opacity: 0.5;
+}
+
+.card {
+  position: relative;
+  width: 7vw;
+  height: 10vw;
+  border-radius: 7px;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  -webkit-box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.25);
+  color: #000;
+  margin-bottom: -8vw;
+}
+
+.card .card-open {
+  background: linear-gradient(135deg, #d9dadb 0%, #c4c6c9 100%);
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+.card .card-open span {
+  position: absolute;
+  text-align: center;
+}
+
+.card .card-open:hover {
+  background: linear-gradient(135deg, #d9dadb 0%, #949ba2 100%);
+}
+
+.card .card-open .card-number-top {
+  top: 2px;
+  left: 10px;
+}
+
+.card .card-open .card-number-bottom {
+  bottom: 2px;
+  right: 10px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.card .card-open .card-symbol {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 25px;
+  color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.card .card-back {
+  background-image: url("/card_back.webp");
+  background-repeat: no-repeat;
+  width: inherit;
+  height: inherit;
+  background-size: 100% 100%;
+}
+
+.card-placeholder {
+  border: 3px groove #d6d6d6;
+}
+
+.board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100;
+}
+
+.table-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.table-top .time-text {
+  width: 120px;
+}
+
+.table-top .time-text span {
+  position: absolute;
+  top: 18px;
+  font-weight: 600;
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.table-top .time-text img {
+  margin-top: 5px;
+  height: 30px;
+}
+
+.table-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.table-deck {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-bottom: 10vw;
+}
+
+.table-deck .deck-card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 20%;
+}
+
+.table-deck .placeholder-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 80%;
+}
+
+.toaster-wrapper {
+  position: absolute !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  top: inherit !important;
+}
+
+.hint-button {
+  position: absolute !important;
+  right: 20px;
+  bottom: 10px;
+}
+/*# sourceMappingURL=main.css.map */

@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,10 +122,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,17 +140,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,7 +159,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;GBox&gt;
+  &lt;GBox v-if="dialogState"&gt;
   &lt;GModal :title="title" :value="dialogState" @close="closeDialog"&gt;
         &lt;template #body&gt;
         &lt;GText variant="body"&gt;{{ description }}&lt;/GText&gt;
@@ -173,10 +173,10 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import GModal from '@trendyol-js/grace/core/GModal';</span>
-<span class="cstat-no" title="statement not covered" >import GButton from '@trendyol-js/grace/core/GButton';</span>
-<span class="cstat-no" title="statement not covered" >import GText from '@trendyol-js/grace/core/GText';</span>
-<span class="cstat-no" title="statement not covered" >import GBox from '@trendyol-js/grace/core/GBox';</span>
+import GModal from '@trendyol-js/grace/core/GModal';
+import GButton from '@trendyol-js/grace/core/GButton';
+import GText from '@trendyol-js/grace/core/GText';
+import GBox from '@trendyol-js/grace/core/GBox';
 export default {
     components: {
         GModal,
@@ -190,18 +190,18 @@ export default {
             default: false
         },
     },
-<span class="fstat-no" title="function not covered" >    data(){</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
+    data(){
+        return {
             title: "Are you sure?",
             description: "All game data will be deleted. This is a permanent action."
         }
     },
     methods: {
-<span class="fstat-no" title="function not covered" >        closeDialog(){</span>
-<span class="cstat-no" title="statement not covered" >            this.$emit('close')</span>
+        closeDialog(){
+            this.$emit('close')
         },
-<span class="fstat-no" title="function not covered" >        agreed(){</span>
-<span class="cstat-no" title="statement not covered" >            this.$emit('agree')</span>
+        agreed(){
+            this.$emit('agree')
         }
     }
 }
@@ -216,7 +216,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 17 2021 11:58:51 GMT+0300 (GMT+03:00)
+                at Sun Aug 22 2021 13:33:42 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

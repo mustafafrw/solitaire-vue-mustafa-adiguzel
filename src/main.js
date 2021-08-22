@@ -6,6 +6,7 @@ import GToasterPlugin from '@trendyol-js/grace/plugins/GToaster.plugin';
 import GToaster   from '@trendyol-js/grace/core/GToaster';
 import "@trendyol-js/grace/css/root.css";
 import "@trendyol-js/grace/css/system.css";
+import '@/assets/css/main.css';
 
 Vue.config.productionTip = false
 

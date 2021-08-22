@@ -30,16 +30,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.board {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100;
-}
-.board .card {
-    margin-top: -10px;
-}
-</style>

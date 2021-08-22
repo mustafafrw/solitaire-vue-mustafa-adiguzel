@@ -1,10 +1,13 @@
 import 
 {   cardTitle,
     getCardObject,
-    createDeck
+    createDeck,
+    isLastCard,
+    isChildCard,
+    isPileCompleted
 } 
 from '@/util/Card'
-
+import mainModule from '@/store/index'
 describe("Card utility functions tests - Card", () => {
     it("should return card title", () => {
         const expectedTitle = "K";
@@ -43,5 +46,122 @@ describe("Card utility functions tests - Card", () => {
             .toEqual(expectedMainDeckLength)
         expect(actualDeck.secondDeck.length)
             .toEqual(expectedSecondDeckLength)
+    })
+    it("should return true if the given card last card in board", () => {
+        const card = {
+            id: 1,
+            number: 1,
+            title: "A",
+            open: true
+        }
+        const board = {
+            id: "board-1",
+            cards: [
+                {
+                    id: 2,
+                    number: 2,
+                    title: "2",
+                    open: true
+                },
+                {
+                    id: 1,
+                    number: 1,
+                    title: "A",
+                    open: true
+                }
+            ]
+        }
+
+        const actualResult = isLastCard(card, board);
+        expect(actualResult).toEqual(true)
+
+    })
+    it("should return false if the given card is not the last card in board", () => {
+        const card = {
+            id: 2,
+            number: 2,
+            title: "2",
+            open: true
+        }
+        const board = {
+            id: "board-1",
+            cards: [
+                {
+                    id: 2,
+                    number: 2,
+                    title: "2",
+                    open: true
+                },
+                {
+                    id: 1,
+                    number: 1,
+                    title: "A",
+                    open: true
+                }
+            ]
+        }
+
+        const actualResult = isLastCard(card, board);
+        expect(actualResult).toEqual(false)
+
+    })
+    
+    
+})
+describe("Card utility functions tests - Related with Store", () => {
+    beforeEach(() => {
+        mainModule.dispatch('startSolitaire')
+    })
+    it("should return true if the given card is a child card of the last card of the drop board", () => {
+        const card = {
+            id: 1,
+            number: 1,
+            title: "A",
+            open: true
+        }
+
+        const board = {
+            id: "board-1",
+            cards: [
+                {
+                    id: 2,
+                    number: 2,
+                    title: "2",
+                    open: true
+                },
+            ]
+        }
+
+        const actualResult = isChildCard(card, board);
+
+        expect(actualResult).toEqual(true)
+
+    })
+    it("should return true if there is not any card in the drop board", () => {
+        
+        const card = {
+            id: 1,
+            number: 1,
+            title: "A",
+            open: true
+        }
+        const board = {
+            id: "board-1",
+            cards: [ ]
+        }
+
+        const actualResult = isChildCard(card, board);
+
+        expect(actualResult).toEqual(true)
+
+    })
+    it("should return false if the boards card count lower than 13", () => {
+
+        const boardId = mainModule.getters.getBoards[0].id
+
+        const actualResult = isPileCompleted(boardId);
+
+        expect(actualResult).toEqual(false)
+
     })
 })

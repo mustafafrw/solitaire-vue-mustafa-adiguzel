@@ -27,14 +27,13 @@
             :card = "defaultCompletedCard"
             :isLast = "true"
         />
-
       </div>
     </div>
     
 </template>
 
 <script>
-import Card from '@/components/Card'
+import Card from '@/components/Main/Card'
 export default {
     components: {
         Card
@@ -66,7 +65,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

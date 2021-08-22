@@ -1,7 +1,8 @@
 import 
 {   
     getGameRules,
-    getBoardwithId
+    getBoardwithId,
+    getBoardwithCardId
 } 
 from '@/util/functions'
 import mainModule from '@/store/index'
@@ -36,5 +37,17 @@ describe("Card utility functions tests - functions", () => {
         expect(board)
             .not
             .toBeNull()
+    })
+    it("should get board with card id", () => {
+        mainModule.dispatch('startSolitaire')
+
+        const board = mainModule.getters.getBoards[0]
+
+        const firstCard = board.cards[0];
+
+        const cardsBoard = getBoardwithCardId(firstCard.id)
+        
+        expect(board)
+            .toEqual(cardsBoard)
     })
 })

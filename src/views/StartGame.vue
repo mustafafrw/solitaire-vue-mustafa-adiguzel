@@ -51,11 +51,18 @@ export default {
     methods: {
         startSolitaire(){
             this.$store.dispatch('startSolitaire')
-            this.$router.push('/play')
+            this.routeToPlay()
         },
         startReverseSolitaire(){
             this.$store.dispatch('startReverseSolitaire')
-            this.$router.push('/play')
+            this.routeToPlay()
+        },
+        routeToPlay(){
+            try{
+                this.$router.push('/play')
+            }catch(e){
+                console.log('error while pushing to play', e)
+            }
         }
     }
 }
