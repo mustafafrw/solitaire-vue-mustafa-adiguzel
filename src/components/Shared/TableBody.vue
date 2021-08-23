@@ -144,6 +144,7 @@ export default {
                     if(cardRef){
 
                         cardRef.style.cssText = `
+                            transform: scale(1.05, 1.05);
                             background:linear-gradient(135deg, #f0c512 0%,#da0641 100%);
                         `;
 
