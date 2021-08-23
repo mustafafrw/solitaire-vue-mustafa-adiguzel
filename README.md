@@ -25,3 +25,9 @@ Demo: https://agitated-perlman-ed8c22.netlify.app/#/
 
 ### Multi Drag
 ![multiDrag](https://user-images.githubusercontent.com/49120729/130356693-fbd4cc54-318a-4768-9501-a372c13e0523.jpg)
+
+### Unit Tests
+![unit-test](https://user-images.githubusercontent.com/49120729/130517223-7fa445d3-106e-407b-98dd-bd9ac79b6ad1.jpg)
+
+### Cypress Tests
+![Cypress-tests](https://user-images.githubusercontent.com/49120729/130517527-55df26b4-1472-4c21-87fc-22c69b10e883.jpg)
