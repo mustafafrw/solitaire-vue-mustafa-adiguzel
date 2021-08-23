@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount, mount  } from '@vue/test-utils'
+import { createLocalVue, mount  } from '@vue/test-utils'
 import StartGame from '@/views/StartGame'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'

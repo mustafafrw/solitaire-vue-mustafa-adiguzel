@@ -21,11 +21,13 @@ export default {
     methods: {
        onDrop(e) {
         const cards = JSON.parse(e.dataTransfer.getData('cards'))
-        const payload = {
-          boardId: this.id,
-          cards
+        if(cards){
+          const payload = {
+            boardId: this.id,
+            cards
+          }
+          this.$store.dispatch('move', payload)
         }
-        this.$store.dispatch('move', payload)
       },
     }
 }

@@ -2,11 +2,11 @@
   <GBox v-if="dialogState">
   <GModal :title="title" :value="dialogState" @close="closeDialog">
         <template #body>
-        <GText variant="body">{{ description }}</GText>
+            <GText variant="body">{{ description }}</GText>
         </template>
         <template #footer>
-        <GButton variant="danger" @click="agreed">Back</GButton>
-        <GButton variant="secondary" @click="closeDialog" class="g-ml-10">Cancel</GButton>
+            <GButton variant="danger" @click="agreed">Back</GButton>
+            <GButton variant="secondary" @click="closeDialog" class="g-ml-10">Cancel</GButton>
         </template>
     </GModal>
   </GBox>
